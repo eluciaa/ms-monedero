@@ -47,18 +47,8 @@ public class MonederoServiceImpl implements  MonederoService{
                     return monederoRepository.save(newMonedero);
                 });
     }
-
     @Override
-    public Mono<Monedero> updatePhoneNumber(Integer walletId, String phoneNumber) {
-        return monederoRepository.findById(walletId)
-                .flatMap(newMonedero -> {
-                    newMonedero.setTelefonoAsociado(phoneNumber);
-                    return monederoRepository.save(newMonedero);
-                });
-    }
-
-    @Override
-    public Mono<Object> getAvailableBalance(Integer walletId, String phoneNumber) {
+    public Mono<Object> getAvailableBalance(Integer walletId) {
         return monederoRepository.findById(walletId)
                 .flatMap( monedero -> Mono.just(monedero.getSaldo()));
     }

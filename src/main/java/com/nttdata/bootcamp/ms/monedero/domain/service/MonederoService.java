@@ -12,9 +12,7 @@ public interface MonederoService {
     Mono<Monedero> createMonedero(MonederoDto monederoDto);
     Mono<Monedero> updateMonedero(MonederoDto monederoDto);
 
-    Mono<Monedero> updatePhoneNumber(Integer walletId, String phoneNumber);
-
-    Mono<Object> getAvailableBalance(Integer walletId, String phoneNumber);
+    Mono<Object> getAvailableBalance(Integer walletId);
 
     Mono<Monedero> makeDeposit(MonederoDto monederoDto);
 

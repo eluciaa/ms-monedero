@@ -1,5 +1,6 @@
 package com.nttdata.bootcamp.ms.monedero.infraestructure.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "monedero")
 @Data
 @Generated
+@AllArgsConstructor
 @NoArgsConstructor
 public class Monedero {
 

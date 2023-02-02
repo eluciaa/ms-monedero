@@ -5,6 +5,7 @@ import com.nttdata.bootcamp.ms.monedero.domain.service.MonederoService;
 import com.nttdata.bootcamp.ms.monedero.infraestructure.entity.Monedero;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,7 +24,7 @@ public class MonederoController {
      * @return Monedero
      */
     @GetMapping
-    private Flux<Monedero> getAll(){
+    public Flux<Monedero> getAll(){
       return monederoService.getAll();
     }
 
@@ -33,47 +34,50 @@ public class MonederoController {
      * @Param walletId
      * @return Monedero
      */
-    @GetMapping("/{id}")
-    private Mono<Monedero> getMonederoById(@PathVariable Integer walletId){
+    @GetMapping("/{walletId}")
+    public Mono<Monedero> getMonederoById(@PathVariable Integer walletId){
         return monederoService.getMonederoById(walletId);
     }
 
+    /**
+     *
+     * Create new waller
+     * @Param MonederoDto
+     * @return Monedero
+     */
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    private Mono<Monedero> createMonedero(@RequestBody MonederoDto monederoDto){
+    public Mono<Monedero> createMonedero(@RequestBody MonederoDto monederoDto){
         return monederoService.createMonedero(monederoDto);
     }
+
     @PutMapping
-    private Mono<Monedero> updateMonedero(@RequestBody MonederoDto monederoDto) {
+    public Mono<Monedero> updateMonedero(@RequestBody MonederoDto monederoDto) {
         return monederoService.updateMonedero(monederoDto);
     }
 
-    @PutMapping("/phoneNumber")
-    private Mono<Monedero> updatePhoneNumber(@PathVariable Integer walletId, @PathVariable String phoneNumber){
-        return monederoService.updatePhoneNumber(walletId, phoneNumber);
-    }
-
-    @GetMapping("/balance")
-    private Mono<Object> getAvailableBalance(@PathVariable Integer walletId, @PathVariable String phoneNumber){
-        return monederoService.getAvailableBalance(walletId, phoneNumber);
+    @GetMapping("/balance/{walletId}")
+    public Mono<Object> getAvailableBalance(@PathVariable Integer walletId){
+        return monederoService.getAvailableBalance(walletId);
     }
 
     @PostMapping("/deposit")
-    private Mono<Monedero> makeDeposit(MonederoDto monederoDto){
+    public Mono<Monedero> makeDeposit(@RequestBody MonederoDto monederoDto){
         return monederoService.makeDeposit(monederoDto);
     }
 
     @PostMapping("/payment")
-    private Mono<Monedero> makePayment(MonederoDto monederoDto){
+    public Mono<Monedero> makePayment(@RequestBody MonederoDto monederoDto){
         return monederoService.makePayment(monederoDto);
     }
 
     @PutMapping("/debitCard")
-    private Mono<Monedero> associateDebitCard(MonederoDto monederoDto){
+    public Mono<Monedero> associateDebitCard(@RequestBody MonederoDto monederoDto){
         return monederoService.associateDebitCard(monederoDto);
     }
 
-    @DeleteMapping
-    private Mono<Monedero> deleteMonedero(Integer walletId){
+    @DeleteMapping("/{walletId}")
+    public Mono<Monedero> deleteMonedero(@PathVariable Integer walletId){
         return monederoService.deleteMonedero(walletId);
     }
 }
