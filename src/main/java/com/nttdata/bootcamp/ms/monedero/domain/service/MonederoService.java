@@ -9,7 +9,18 @@ public interface MonederoService {
 
     Flux<Monedero> getAll();
     Mono<Monedero> getMonederoById(Integer id);
-    Mono<Monedero> saveMonedero(MonederoDto monederoDto);
+    Mono<Monedero> createMonedero(MonederoDto monederoDto);
     Mono<Monedero> updateMonedero(MonederoDto monederoDto);
+
+    Mono<Monedero> updatePhoneNumber(Integer walletId, String phoneNumber);
+
+    Mono<Object> getAvailableBalance(Integer walletId, String phoneNumber);
+
+    Mono<Monedero> makeDeposit(MonederoDto monederoDto);
+
+    Mono<Monedero> makePayment(MonederoDto monederoDto);
+
+    Mono<Monedero> associateDebitCard(MonederoDto monederoDto);
+
     Mono<Monedero> deleteMonedero(Integer id);
 }

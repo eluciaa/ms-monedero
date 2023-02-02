@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MonederoRepository extends ReactiveMongoRepository<Monedero, Integer>{
+
 }
